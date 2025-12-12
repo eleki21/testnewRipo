@@ -6,9 +6,11 @@ import { initializeClient } from '../services/claudeApi';
 interface SettingsState {
   settings: QuizSettings;
   isApiKeySet: boolean;
+  isDemoMode: boolean;
   setQuestionCount: (count: 3 | 5 | 10) => void;
   setApiKey: (key: string) => void;
   clearApiKey: () => void;
+  setDemoMode: (enabled: boolean) => void;
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -19,6 +21,7 @@ export const useSettingsStore = create<SettingsState>()(
         apiKey: '',
       },
       isApiKeySet: false,
+      isDemoMode: false,
 
       setQuestionCount: (count) =>
         set((state) => ({
@@ -30,6 +33,7 @@ export const useSettingsStore = create<SettingsState>()(
         set((state) => ({
           settings: { ...state.settings, apiKey: key },
           isApiKeySet: true,
+          isDemoMode: false,
         }));
       },
 
@@ -38,6 +42,11 @@ export const useSettingsStore = create<SettingsState>()(
           settings: { ...state.settings, apiKey: '' },
           isApiKeySet: false,
         })),
+
+      setDemoMode: (enabled) =>
+        set({
+          isDemoMode: enabled,
+        }),
     }),
     {
       name: 'quiz-settings',

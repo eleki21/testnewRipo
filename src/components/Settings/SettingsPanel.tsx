@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSettingsStore } from '../../store/settingsStore';
 import { Button } from '../common/Button';
 
 export const SettingsPanel: React.FC = () => {
-  const { settings, isApiKeySet, setQuestionCount, setApiKey, clearApiKey } =
+  const { settings, isApiKeySet, isDemoMode, setQuestionCount, setApiKey, clearApiKey, setDemoMode } =
     useSettingsStore();
   const [apiKeyInput, setApiKeyInput] = useState('');
   const [showApiKey, setShowApiKey] = useState(false);
@@ -20,6 +20,28 @@ export const SettingsPanel: React.FC = () => {
   return (
     <div className="settings-panel">
       <h3>設定</h3>
+
+      <div className="setting-group">
+        <label className="setting-label">モード</label>
+        <div className="setting-options">
+          <button
+            className={`setting-option ${isDemoMode ? 'active' : ''}`}
+            onClick={() => setDemoMode(true)}
+          >
+            デモモード
+          </button>
+          <button
+            className={`setting-option ${!isDemoMode && isApiKeySet ? 'active' : ''}`}
+            onClick={() => setDemoMode(false)}
+            disabled={!isApiKeySet}
+          >
+            APIモード
+          </button>
+        </div>
+        <p className="setting-hint">
+          デモモードではサンプルのクイズが表示されます。AIによる問題生成にはAPIキーが必要です。
+        </p>
+      </div>
 
       <div className="setting-group">
         <label className="setting-label">問題数</label>

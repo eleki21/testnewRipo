@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useQuizStore } from '../../store/quizStore';
 import { useSettingsStore } from '../../store/settingsStore';
 import { Button } from '../common/Button';
@@ -13,13 +13,19 @@ export const KeywordInput: React.FC = () => {
     selectSuggestion,
     error,
   } = useQuizStore();
-  const { isApiKeySet } = useSettingsStore();
+  const { isApiKeySet, isDemoMode, setDemoMode } = useSettingsStore();
+
+  const canStart = isApiKeySet || isDemoMode;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputValue.trim() && isApiKeySet) {
+    if (inputValue.trim() && canStart) {
       validateAndStart(inputValue.trim());
     }
+  };
+
+  const handleStartDemo = () => {
+    setDemoMode(true);
   };
 
   const isLoading = status === 'validating' || status === 'generating';
@@ -34,23 +40,37 @@ export const KeywordInput: React.FC = () => {
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="クイズのキーワードを入力..."
             className="keyword-input"
-            disabled={isLoading || !isApiKeySet}
+            disabled={isLoading || !canStart}
           />
           <Button
             type="submit"
             variant="primary"
             loading={isLoading}
-            disabled={!inputValue.trim() || !isApiKeySet}
+            disabled={!inputValue.trim() || !canStart}
           >
             クイズ開始
           </Button>
         </div>
       </form>
 
-      {!isApiKeySet && (
-        <p className="api-key-warning">
-          クイズを開始するには、設定画面でClaude APIキーを設定してください。
+      {isDemoMode && (
+        <p className="demo-mode-notice">
+          デモモードで実行中 - サンプルのクイズが表示されます
         </p>
+      )}
+
+      {!canStart && (
+        <div className="setup-options">
+          <p className="api-key-warning">
+            クイズを開始するには、設定画面でClaude APIキーを設定するか、デモモードをお試しください。
+          </p>
+          <Button
+            variant="secondary"
+            onClick={handleStartDemo}
+          >
+            デモモードで試す
+          </Button>
+        </div>
       )}
 
       {error && <p className="error-message">{error}</p>}

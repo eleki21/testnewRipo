@@ -9,6 +9,10 @@ import {
   validateKeyword,
   generateSingleQuestion,
 } from '../services/claudeApi';
+import {
+  getDemoKeywordValidation,
+  getDemoQuizQuestions,
+} from '../services/demoData';
 import { useHistoryStore } from './historyStore';
 import { useSettingsStore } from './settingsStore';
 
@@ -42,8 +46,8 @@ interface QuizState {
 }
 
 export const useQuizStore = create<QuizState>((set, get) => {
-  // Helper function to start quiz
-  const startQuiz = async (keyword: string) => {
+  // Helper function to start quiz with API
+  const startQuizWithApi = async (keyword: string) => {
     const { questionCount } = useSettingsStore.getState().settings;
     const askedQuestionIds = useHistoryStore.getState().getAskedQuestionIds(keyword);
 
@@ -109,9 +113,66 @@ export const useQuizStore = create<QuizState>((set, get) => {
     }
   };
 
+  // Helper function to start quiz with demo data
+  const startQuizWithDemo = (keyword: string) => {
+    const { questionCount } = useSettingsStore.getState().settings;
+
+    set({ status: 'generating' });
+
+    // Simulate a small delay for demo mode
+    setTimeout(() => {
+      const questions = getDemoQuizQuestions(keyword, questionCount);
+
+      const session: QuizSession = {
+        id: `session_${Date.now()}`,
+        keyword,
+        questions,
+        currentQuestionIndex: 0,
+        answers: [],
+        score: 0,
+        totalQuestions: questionCount,
+        startedAt: new Date(),
+      };
+
+      set({
+        status: 'in_progress',
+        session,
+        currentQuestion: questions[0],
+        selectedAnswer: null,
+        showExplanation: false,
+      });
+    }, 500);
+  };
+
+  // Helper function to start quiz (chooses between API and demo)
+  const startQuiz = async (keyword: string) => {
+    const { isDemoMode } = useSettingsStore.getState();
+
+    if (isDemoMode) {
+      startQuizWithDemo(keyword);
+    } else {
+      await startQuizWithApi(keyword);
+    }
+  };
+
   // Helper function to prefetch next quiz
   const prefetchNextQuiz = async (keyword: string) => {
+    const { isDemoMode } = useSettingsStore.getState();
     const { questionCount } = useSettingsStore.getState().settings;
+
+    if (isDemoMode) {
+      // For demo mode, prefetch is instant
+      const questions = getDemoQuizQuestions(keyword, questionCount);
+      set({
+        prefetchedQuiz: {
+          keyword,
+          questions,
+          ready: true,
+        },
+      });
+      return;
+    }
+
     const askedQuestionIds = useHistoryStore.getState().getAskedQuestionIds(keyword);
 
     set({
@@ -165,10 +226,21 @@ export const useQuizStore = create<QuizState>((set, get) => {
     setKeyword: (keyword) => set({ keyword }),
 
     validateAndStart: async (keyword) => {
+      const { isDemoMode } = useSettingsStore.getState();
+
       set({ status: 'validating', keyword, error: null, validationResult: null });
 
       try {
-        const result = await validateKeyword(keyword);
+        let result: KeywordValidationResult;
+
+        if (isDemoMode) {
+          // Simulate validation delay
+          await new Promise((resolve) => setTimeout(resolve, 300));
+          result = getDemoKeywordValidation(keyword);
+        } else {
+          result = await validateKeyword(keyword);
+        }
+
         set({ validationResult: result });
 
         if (result.status === 'valid') {
@@ -210,6 +282,8 @@ export const useQuizStore = create<QuizState>((set, get) => {
 
     nextQuestion: async () => {
       const { session } = get();
+      const { isDemoMode } = useSettingsStore.getState();
+
       if (!session) return;
 
       const nextIndex = session.currentQuestionIndex + 1;
@@ -254,8 +328,8 @@ export const useQuizStore = create<QuizState>((set, get) => {
           selectedAnswer: null,
           showExplanation: false,
         });
-      } else {
-        // Need to fetch the next question on-demand
+      } else if (!isDemoMode) {
+        // Need to fetch the next question on-demand (API mode only)
         set({ isLoadingNextQuestion: true });
 
         try {
