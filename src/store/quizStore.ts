@@ -12,9 +12,11 @@ import {
 import {
   getDemoKeywordValidation,
   getDemoQuizQuestions,
+  getQuestionsByCategoryId,
 } from '../services/demoData';
 import { useHistoryStore } from './historyStore';
 import { useSettingsStore } from './settingsStore';
+import { useQuizDataStore } from './quizDataStore';
 
 interface PrefetchedQuiz {
   keyword: string;
@@ -25,6 +27,7 @@ interface PrefetchedQuiz {
 interface QuizState {
   status: QuizStatus;
   keyword: string;
+  selectedCategoryId: string | null;
   validationResult: KeywordValidationResult | null;
   session: QuizSession | null;
   currentQuestion: QuizQuestion | null;
@@ -36,7 +39,9 @@ interface QuizState {
 
   // Actions
   setKeyword: (keyword: string) => void;
+  setSelectedCategory: (categoryId: string | null) => void;
   validateAndStart: (keyword: string) => Promise<void>;
+  startWithCategory: (categoryId: string | null) => void;
   selectSuggestion: (suggestion: string) => void;
   selectAnswer: (answerIndex: number) => void;
   nextQuestion: () => Promise<void>;
@@ -114,23 +119,39 @@ export const useQuizStore = create<QuizState>((set, get) => {
   };
 
   // Helper function to start quiz with demo data
-  const startQuizWithDemo = (keyword: string) => {
+  const startQuizWithDemo = (keyword: string, categoryId: string | null) => {
     const { questionCount } = useSettingsStore.getState().settings;
 
     set({ status: 'generating' });
 
     // Simulate a small delay for demo mode
     setTimeout(() => {
-      const questions = getDemoQuizQuestions(keyword, questionCount);
+      let questions: QuizQuestion[];
+
+      if (categoryId) {
+        questions = getQuestionsByCategoryId(categoryId, questionCount);
+      } else {
+        questions = getDemoQuizQuestions(keyword, questionCount);
+      }
+
+      if (questions.length === 0) {
+        set({
+          status: 'error',
+          error: 'このカテゴリには問題がありません。設定画面から問題をインポートしてください。',
+        });
+        return;
+      }
+
+      const actualCount = Math.min(questionCount, questions.length);
 
       const session: QuizSession = {
         id: `session_${Date.now()}`,
-        keyword,
-        questions,
+        keyword: categoryId || keyword,
+        questions: questions.slice(0, actualCount),
         currentQuestionIndex: 0,
         answers: [],
         score: 0,
-        totalQuestions: questionCount,
+        totalQuestions: actualCount,
         startedAt: new Date(),
       };
 
@@ -147,9 +168,10 @@ export const useQuizStore = create<QuizState>((set, get) => {
   // Helper function to start quiz (chooses between API and demo)
   const startQuiz = async (keyword: string) => {
     const { isDemoMode } = useSettingsStore.getState();
+    const { selectedCategoryId } = get();
 
     if (isDemoMode) {
-      startQuizWithDemo(keyword);
+      startQuizWithDemo(keyword, selectedCategoryId);
     } else {
       await startQuizWithApi(keyword);
     }
@@ -159,10 +181,16 @@ export const useQuizStore = create<QuizState>((set, get) => {
   const prefetchNextQuiz = async (keyword: string) => {
     const { isDemoMode } = useSettingsStore.getState();
     const { questionCount } = useSettingsStore.getState().settings;
+    const { selectedCategoryId } = get();
 
     if (isDemoMode) {
       // For demo mode, prefetch is instant
-      const questions = getDemoQuizQuestions(keyword, questionCount);
+      let questions: QuizQuestion[];
+      if (selectedCategoryId) {
+        questions = getQuestionsByCategoryId(selectedCategoryId, questionCount);
+      } else {
+        questions = getDemoQuizQuestions(keyword, questionCount);
+      }
       set({
         prefetchedQuiz: {
           keyword,
@@ -214,6 +242,7 @@ export const useQuizStore = create<QuizState>((set, get) => {
   return {
     status: 'idle',
     keyword: '',
+    selectedCategoryId: null,
     validationResult: null,
     session: null,
     currentQuestion: null,
@@ -224,6 +253,29 @@ export const useQuizStore = create<QuizState>((set, get) => {
     prefetchedQuiz: null,
 
     setKeyword: (keyword) => set({ keyword }),
+
+    setSelectedCategory: (categoryId) => set({ selectedCategoryId: categoryId }),
+
+    startWithCategory: (categoryId) => {
+      const { isDemoMode } = useSettingsStore.getState();
+
+      if (!isDemoMode) {
+        set({ error: 'カテゴリ選択はデモモードでのみ使用できます' });
+        return;
+      }
+
+      set({ selectedCategoryId: categoryId, error: null });
+
+      // Get category name for keyword
+      let keyword = 'すべてのカテゴリ';
+      if (categoryId) {
+        const category = useQuizDataStore.getState().categories.find((c) => c.id === categoryId);
+        keyword = category?.name || categoryId;
+      }
+
+      set({ keyword });
+      startQuizWithDemo(keyword, categoryId);
+    },
 
     validateAndStart: async (keyword) => {
       const { isDemoMode } = useSettingsStore.getState();
@@ -397,11 +449,14 @@ export const useQuizStore = create<QuizState>((set, get) => {
     },
 
     restartQuiz: () => {
-      const { keyword, prefetchedQuiz } = get();
+      const { keyword, prefetchedQuiz, selectedCategoryId } = get();
+      const { isDemoMode } = useSettingsStore.getState();
 
       // Try to use prefetched quiz first
       if (prefetchedQuiz?.ready && prefetchedQuiz.keyword === keyword) {
         get().usePrefetchedQuiz();
+      } else if (isDemoMode && selectedCategoryId !== undefined) {
+        get().startWithCategory(selectedCategoryId);
       } else {
         get().validateAndStart(keyword);
       }
@@ -411,6 +466,7 @@ export const useQuizStore = create<QuizState>((set, get) => {
       set({
         status: 'idle',
         keyword: '',
+        selectedCategoryId: null,
         validationResult: null,
         session: null,
         currentQuestion: null,

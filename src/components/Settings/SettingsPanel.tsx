@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useSettingsStore } from '../../store/settingsStore';
 import { Button } from '../common/Button';
+import { DataManager } from './DataManager';
 
 export const SettingsPanel: React.FC = () => {
   const { settings, isApiKeySet, isDemoMode, setQuestionCount, setApiKey, clearApiKey, setDemoMode } =
@@ -115,6 +116,10 @@ export const SettingsPanel: React.FC = () => {
           </a>
           でAPIキーを取得できます。
         </p>
+      </div>
+
+      <div className="setting-group">
+        <DataManager />
       </div>
     </div>
   );
