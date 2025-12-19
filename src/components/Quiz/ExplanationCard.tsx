@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import type { ReactNode } from 'react';
 import type { QuizQuestion } from '../../types/quiz';
 import { Tooltip } from './Tooltip';
-import { getUnsplashImageUrl } from '../../services/unsplashApi';
 
 interface ExplanationCardProps {
   question: QuizQuestion;
@@ -13,31 +12,32 @@ export const ExplanationCard: React.FC<ExplanationCardProps> = ({
   question,
   isCorrect,
 }) => {
-  const imageUrl = useMemo(() => {
-    if (question.imageKeyword) {
-      return getUnsplashImageUrl(question.imageKeyword, 600, 300);
-    }
-    return null;
-  }, [question.imageKeyword]);
+  // Convert keywords object to array for processing
+  const keywordEntries = useMemo(() => {
+    if (!question.keywords) return [];
+    return Object.entries(question.keywords).map(([term, definition]) => ({
+      term,
+      definition,
+    }));
+  }, [question.keywords]);
 
-  // Replace technical terms in explanation with tooltips
+  // Replace keywords in explanation with tooltips
   const renderExplanationWithTooltips = () => {
     const explanation = question.explanation;
-    const terms = question.technicalTerms;
 
-    if (!terms || terms.length === 0) {
+    if (keywordEntries.length === 0) {
       return <p>{explanation}</p>;
     }
 
     // Sort terms by length (longest first) to avoid partial replacements
-    const sortedTerms = [...terms].sort((a, b) => b.term.length - a.term.length);
+    const sortedTerms = [...keywordEntries].sort((a, b) => b.term.length - a.term.length);
 
     // Create a map of term positions
     const elements: ReactNode[] = [];
     let lastIndex = 0;
 
     // Find all term occurrences
-    const occurrences: { term: typeof terms[0]; start: number; end: number }[] = [];
+    const occurrences: { term: typeof keywordEntries[0]; start: number; end: number }[] = [];
 
     for (const termObj of sortedTerms) {
       const regex = new RegExp(termObj.term, 'g');
@@ -88,38 +88,17 @@ export const ExplanationCard: React.FC<ExplanationCardProps> = ({
         </span>
       </div>
 
-      {imageUrl && (
-        <div className="explanation-image">
-          <img src={imageUrl} alt="解説画像" loading="lazy" />
-        </div>
-      )}
-
       <div className="explanation-content">
         <h4>解説</h4>
         {renderExplanationWithTooltips()}
 
-        {question.technicalTerms && question.technicalTerms.length > 0 && (
+        {keywordEntries.length > 0 && (
           <div className="terms-hint">
             <span className="hint-icon">💡</span>
             <span>青い文字をホバー/タップすると用語の説明が表示されます</span>
           </div>
         )}
       </div>
-
-      {question.referenceLinks && question.referenceLinks.length > 0 && (
-        <div className="reference-links">
-          <h5>参考リンク</h5>
-          <ul>
-            {question.referenceLinks.map((link, index) => (
-              <li key={index}>
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  {link.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };

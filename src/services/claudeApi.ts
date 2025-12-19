@@ -89,24 +89,17 @@ ${excludeQuestionIds.length > 0 ? `注意: 以下の問題IDと似た問題は�
   "id": "一意のID（keyword_timestamp_index形式）",
   "question": "問題文",
   "options": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
-  "correctAnswer": 0,
+  "answer": 0,
   "explanation": "詳しい解説文（200-300文字程度）",
-  "technicalTerms": [
-    {"term": "専門用語1", "definition": "定義1"},
-    {"term": "専門用語2", "definition": "定義2"}
-  ],
-  "referenceLinks": [
-    {"title": "Wikipedia - 関連記事", "url": "https://ja.wikipedia.org/wiki/..."},
-    {"title": "参考サイト", "url": "https://..."}
-  ],
-  "imageKeyword": "Unsplash検索用の英語キーワード"
+  "keywords": {
+    "専門用語1": "専門用語1の定義",
+    "専門用語2": "専門用語2の定義"
+  }
 }
 
 注意:
-- correctAnswerは0-3の数値（正解の選択肢のインデックス）
-- technicalTermsは2〜4個
-- referenceLinksは1〜3個（実在するURLを推測で記載）
-- imageKeywordは解説に関連する画像検索用キーワード（英語）`,
+- answerは0-3の数値（正解の選択肢のインデックス）
+- keywordsは2〜4個のキーワードとその説明をオブジェクト形式で記載`,
         },
       ],
     });
@@ -127,10 +120,9 @@ ${excludeQuestionIds.length > 0 ? `注意: 以下の問題IDと似た問題は�
         id: `${keyword}_${Date.now()}_${i}`,
         question: `${keyword}に関する問題の生成に失敗しました。`,
         options: ['選択肢A', '選択肢B', '選択肢C', '選択肢D'],
-        correctAnswer: 0,
+        answer: 0,
         explanation: '問題の生成中にエラーが発生しました。',
-        technicalTerms: [],
-        referenceLinks: [],
+        keywords: {},
       };
       yield fallbackQuestion;
     }
@@ -162,17 +154,12 @@ ${excludeQuestionIds.length > 0 ? `注意: 以下の問題IDと似た問題は�
   "id": "一意のID",
   "question": "問題文",
   "options": ["選択肢1", "選択肢2", "選択肢3", "選択肢4"],
-  "correctAnswer": 0,
+  "answer": 0,
   "explanation": "詳しい解説文（200-300文字程度）",
-  "technicalTerms": [
-    {"term": "専門用語1", "definition": "定義1"},
-    {"term": "専門用語2", "definition": "定義2"}
-  ],
-  "referenceLinks": [
-    {"title": "Wikipedia - 関連記事", "url": "https://ja.wikipedia.org/wiki/..."},
-    {"title": "参考サイト", "url": "https://..."}
-  ],
-  "imageKeyword": "Unsplash検索用の英語キーワード"
+  "keywords": {
+    "専門用語1": "専門用語1の定義",
+    "専門用語2": "専門用語2の定義"
+  }
 }`,
       },
     ],

@@ -36,11 +36,9 @@ function convertToQuizQuestion(data: QuizQuestionData, keyword: string, index: n
     id: `${keyword}_${Date.now()}_${index}`,
     question: data.question,
     options: data.options,
-    correctAnswer: data.correctAnswer,
+    answer: data.answer,
     explanation: data.explanation,
-    technicalTerms: data.technicalTerms,
-    referenceLinks: data.referenceLinks,
-    imageKeyword: data.imageKeyword,
+    keywords: data.keywords,
   };
 }
 

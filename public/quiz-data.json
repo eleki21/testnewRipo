@@ -44,16 +44,12 @@
         "開発者の愛称から",
         "ギリシャ神話のピュトンから"
       ],
-      "correctAnswer": 1,
-      "explanation": "Pythonは、オランダ人プログラマーのグイド・ヴァン・ロッサムが1991年に開発しました。名前はイギリスのコメディ番組「モンティ・パイソンの空飛ぶサーカス」に由来しています。ヴァン・ロッサムはこの番組の大ファンで、短くてユニークな名前を探していた時にこの名前を選びました。",
-      "technicalTerms": [
-        { "term": "プログラマー", "definition": "コンピュータプログラムを作成する専門家" },
-        { "term": "モンティ・パイソン", "definition": "1969年から1974年に放送されたイギリスのコメディ番組" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - Python", "url": "https://ja.wikipedia.org/wiki/Python" }
-      ],
-      "imageKeyword": "python programming"
+      "answer": 1,
+      "explanation": "Pythonは、オランダ人プログラマーのグイド・ヴァン・ロッサムが1991年に開発しました。名前はイギリスのコメディ番組「モンティ・パイソンの空飛ぶサーカス」に由来しています。",
+      "keywords": {
+        "プログラマー": "コンピュータプログラムを作成する専門家",
+        "モンティ・パイソン": "1969年から1974年に放送されたイギリスのコメディ番組"
+      }
     },
     {
       "id": "prog_002",
@@ -65,16 +61,12 @@
         "map()",
         "reduce()"
       ],
-      "correctAnswer": 2,
-      "explanation": "map()メソッドは、配列の各要素に対して関数を実行し、その結果から新しい配列を生成します。[1,2,3].map(x => x * 2)は[2,4,6]を返します。forEach()は新しい配列を返さず、filter()は条件に合う要素を抽出し、reduce()は配列を単一の値に縮約します。",
-      "technicalTerms": [
-        { "term": "map()", "definition": "配列の各要素を変換して新しい配列を生成するメソッド" },
-        { "term": "コールバック関数", "definition": "他の関数に引数として渡され、後で呼び出される関数" }
-      ],
-      "referenceLinks": [
-        { "title": "MDN - Array.map()", "url": "https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/map" }
-      ],
-      "imageKeyword": "javascript code"
+      "answer": 2,
+      "explanation": "map()メソッドは、配列の各要素に対して関数を実行し、その結果から新しい配列を生成します。[1,2,3].map(x => x * 2)は[2,4,6]を返します。",
+      "keywords": {
+        "map()": "配列の各要素を変換して新しい配列を生成するメソッド",
+        "コールバック関数": "他の関数に引数として渡され、後で呼び出される関数"
+      }
     },
     {
       "id": "prog_003",
@@ -86,16 +78,12 @@
         "string + number",
         "string, number"
       ],
-      "correctAnswer": 1,
-      "explanation": "TypeScriptでは、|演算子（パイプ）を使ってユニオン型を定義します。string | numberは「文字列または数値」を意味します。一方、&演算子はインターセクション型（両方の型を満たす）を定義するために使用されます。",
-      "technicalTerms": [
-        { "term": "ユニオン型", "definition": "複数の型のいずれかを表す型。|で結合する" },
-        { "term": "インターセクション型", "definition": "複数の型のすべてを満たす型。&で結合する" }
-      ],
-      "referenceLinks": [
-        { "title": "TypeScript Handbook - Union Types", "url": "https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types" }
-      ],
-      "imageKeyword": "typescript programming"
+      "answer": 1,
+      "explanation": "TypeScriptでは、|演算子（パイプ）を使ってユニオン型を定義します。string | numberは「文字列または数値」を意味します。",
+      "keywords": {
+        "ユニオン型": "複数の型のいずれかを表す型。|で結合する",
+        "インターセクション型": "複数の型のすべてを満たす型。&で結合する"
+      }
     },
     {
       "id": "prog_004",
@@ -107,16 +95,12 @@
         "コンパイル",
         "ポリモーフィズム"
       ],
-      "correctAnswer": 2,
+      "answer": 2,
       "explanation": "オブジェクト指向プログラミング（OOP）の4つの主要な概念は、カプセル化、継承、ポリモーフィズム（多態性）、抽象化です。コンパイルはプログラムを機械語に変換するプロセスであり、OOPの概念ではありません。",
-      "technicalTerms": [
-        { "term": "カプセル化", "definition": "データとメソッドを一つの単位にまとめ、外部からのアクセスを制限すること" },
-        { "term": "ポリモーフィズム", "definition": "同じインターフェースで異なる実装を持つオブジェクトを扱えること" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - オブジェクト指向プログラミング", "url": "https://ja.wikipedia.org/wiki/オブジェクト指向プログラミング" }
-      ],
-      "imageKeyword": "object oriented programming"
+      "keywords": {
+        "カプセル化": "データとメソッドを一つの単位にまとめ、外部からのアクセスを制限すること",
+        "ポリモーフィズム": "同じインターフェースで異なる実装を持つオブジェクトを扱えること"
+      }
     },
     {
       "id": "web_001",
@@ -128,16 +112,12 @@
         "リソースが見つからない",
         "認証が必要"
       ],
-      "correctAnswer": 2,
-      "explanation": "HTTPステータスコード404は「Not Found」を意味し、リクエストされたリソース（ページやファイルなど）がサーバー上に存在しないことを示します。これはウェブ開発において最もよく知られたエラーコードの一つです。",
-      "technicalTerms": [
-        { "term": "HTTP", "definition": "HyperText Transfer Protocolの略。ウェブ上でデータを転送するためのプロトコル" },
-        { "term": "ステータスコード", "definition": "HTTPレスポンスの状態を3桁の数字で表したもの" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - HTTP 404", "url": "https://ja.wikipedia.org/wiki/HTTP_404" }
-      ],
-      "imageKeyword": "web error 404"
+      "answer": 2,
+      "explanation": "HTTPステータスコード404は「Not Found」を意味し、リクエストされたリソース（ページやファイルなど）がサーバー上に存在しないことを示します。",
+      "keywords": {
+        "HTTP": "HyperText Transfer Protocolの略。ウェブ上でデータを転送するためのプロトコル",
+        "ステータスコード": "HTTPレスポンスの状態を3桁の数字で表したもの"
+      }
     },
     {
       "id": "web_002",
@@ -149,17 +129,13 @@
         "text-align: center",
         "margin: auto"
       ],
-      "correctAnswer": 1,
-      "explanation": "justify-contentプロパティは、Flexコンテナ内のアイテムを主軸（デフォルトでは水平方向）に沿って配置します。centerを指定すると、アイテムが主軸の中央に配置されます。一方、align-itemsは交差軸（デフォルトでは垂直方向）の配置を制御します。",
-      "technicalTerms": [
-        { "term": "Flexbox", "definition": "CSSのレイアウトモジュール。要素の配置を柔軟に行える" },
-        { "term": "主軸", "definition": "Flexコンテナのメイン方向。flex-directionで設定される" },
-        { "term": "交差軸", "definition": "主軸に垂直な方向" }
-      ],
-      "referenceLinks": [
-        { "title": "MDN - Flexbox", "url": "https://developer.mozilla.org/ja/docs/Web/CSS/CSS_flexible_box_layout" }
-      ],
-      "imageKeyword": "css flexbox layout"
+      "answer": 1,
+      "explanation": "justify-contentプロパティは、Flexコンテナ内のアイテムを主軸（デフォルトでは水平方向）に沿って配置します。centerを指定すると、アイテムが主軸の中央に配置されます。",
+      "keywords": {
+        "Flexbox": "CSSのレイアウトモジュール。要素の配置を柔軟に行える",
+        "主軸": "Flexコンテナのメイン方向。flex-directionで設定される",
+        "交差軸": "主軸に垂直な方向"
+      }
     },
     {
       "id": "web_003",
@@ -171,16 +147,12 @@
         "state = state + 1",
         "this.setState({ count: count + 1 })"
       ],
-      "correctAnswer": 1,
-      "explanation": "useStateの更新関数には、関数を渡すことで前の状態を安全に参照できます。setState(prev => prev + 1)のように関数を使うと、Reactは最新の状態値を引数として渡してくれます。これにより、複数の更新が連続で行われる場合でも正確な値を参照できます。",
-      "technicalTerms": [
-        { "term": "useState", "definition": "Reactの関数コンポーネントで状態を管理するためのフック" },
-        { "term": "フック", "definition": "Reactの機能を関数コンポーネントで使用するための特別な関数" }
-      ],
-      "referenceLinks": [
-        { "title": "React Docs - useState", "url": "https://ja.react.dev/reference/react/useState" }
-      ],
-      "imageKeyword": "react programming"
+      "answer": 1,
+      "explanation": "useStateの更新関数には、関数を渡すことで前の状態を安全に参照できます。setState(prev => prev + 1)のように関数を使うと、Reactは最新の状態値を引数として渡してくれます。",
+      "keywords": {
+        "useState": "Reactの関数コンポーネントで状態を管理するためのフック",
+        "フック": "Reactの機能を関数コンポーネントで使用するための特別な関数"
+      }
     },
     {
       "id": "web_004",
@@ -192,16 +164,12 @@
         "PUT",
         "DELETE"
       ],
-      "correctAnswer": 1,
-      "explanation": "POSTメソッドは新しいリソースを作成するために使用されます。GETはリソースの取得、PUTはリソースの更新または作成、DELETEはリソースの削除に使用されます。RESTful APIでは、これらのHTTPメソッドを使ってCRUD操作を表現します。",
-      "technicalTerms": [
-        { "term": "REST", "definition": "Representational State Transferの略。Webサービスの設計スタイル" },
-        { "term": "CRUD", "definition": "Create, Read, Update, Deleteの頭文字。データ操作の基本4機能" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - REST", "url": "https://ja.wikipedia.org/wiki/Representational_State_Transfer" }
-      ],
-      "imageKeyword": "api web service"
+      "answer": 1,
+      "explanation": "POSTメソッドは新しいリソースを作成するために使用されます。GETはリソースの取得、PUTはリソースの更新または作成、DELETEはリソースの削除に使用されます。",
+      "keywords": {
+        "REST": "Representational State Transferの略。Webサービスの設計スタイル",
+        "CRUD": "Create, Read, Update, Deleteの頭文字。データ操作の基本4機能"
+      }
     },
     {
       "id": "db_001",
@@ -213,16 +181,12 @@
         "INNER JOIN",
         "FULL OUTER JOIN"
       ],
-      "correctAnswer": 2,
-      "explanation": "INNER JOINは、両方のテーブルで結合条件に一致するレコードのみを返します。LEFT JOINは左テーブルの全レコードと一致する右テーブルのレコードを、RIGHT JOINはその逆を返します。FULL OUTER JOINは両方のテーブルの全レコードを返します。",
-      "technicalTerms": [
-        { "term": "JOIN", "definition": "複数のテーブルを結合してデータを取得するSQL操作" },
-        { "term": "レコード", "definition": "データベーステーブルの1行のデータ" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - JOIN (SQL)", "url": "https://ja.wikipedia.org/wiki/JOIN_(SQL)" }
-      ],
-      "imageKeyword": "database sql"
+      "answer": 2,
+      "explanation": "INNER JOINは、両方のテーブルで結合条件に一致するレコードのみを返します。LEFT JOINは左テーブルの全レコードと一致する右テーブルのレコードを返します。",
+      "keywords": {
+        "JOIN": "複数のテーブルを結合してデータを取得するSQL操作",
+        "レコード": "データベーステーブルの1行のデータ"
+      }
     },
     {
       "id": "db_002",
@@ -234,16 +198,12 @@
         "Integration（統合性）",
         "Durability（永続性）"
       ],
-      "correctAnswer": 2,
-      "explanation": "ACID特性は、Atomicity（原子性）、Consistency（一貫性）、Isolation（分離性）、Durability（永続性）の4つです。Integration（統合性）はACID特性には含まれません。これらの特性はトランザクション処理の信頼性を保証します。",
-      "technicalTerms": [
-        { "term": "トランザクション", "definition": "データベース操作の一連の処理単位" },
-        { "term": "原子性", "definition": "トランザクション内の操作がすべて成功するか、すべて失敗するかのどちらかであること" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - ACID", "url": "https://ja.wikipedia.org/wiki/ACID_(コンピュータ科学)" }
-      ],
-      "imageKeyword": "database transaction"
+      "answer": 2,
+      "explanation": "ACID特性は、Atomicity（原子性）、Consistency（一貫性）、Isolation（分離性）、Durability（永続性）の4つです。Integration（統合性）はACID特性には含まれません。",
+      "keywords": {
+        "トランザクション": "データベース操作の一連の処理単位",
+        "原子性": "トランザクション内の操作がすべて成功するか、すべて失敗するかのどちらかであること"
+      }
     },
     {
       "id": "db_003",
@@ -255,16 +215,12 @@
         "リレーショナル型",
         "グラフ型"
       ],
-      "correctAnswer": 2,
-      "explanation": "NoSQLデータベースには、ドキュメント型（MongoDB）、キーバリュー型（Redis）、カラム型（Cassandra）、グラフ型（Neo4j）などがあります。リレーショナル型はSQLデータベースの特徴であり、NoSQLには含まれません。",
-      "technicalTerms": [
-        { "term": "NoSQL", "definition": "Not Only SQLの略。非リレーショナルなデータベースの総称" },
-        { "term": "ドキュメント型", "definition": "JSONやXMLのような構造化データを格納するデータベース" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - NoSQL", "url": "https://ja.wikipedia.org/wiki/NoSQL" }
-      ],
-      "imageKeyword": "nosql database"
+      "answer": 2,
+      "explanation": "NoSQLデータベースには、ドキュメント型（MongoDB）、キーバリュー型（Redis）、カラム型（Cassandra）、グラフ型（Neo4j）などがあります。リレーショナル型はSQLデータベースの特徴です。",
+      "keywords": {
+        "NoSQL": "Not Only SQLの略。非リレーショナルなデータベースの総称",
+        "ドキュメント型": "JSONやXMLのような構造化データを格納するデータベース"
+      }
     },
     {
       "id": "devops_001",
@@ -276,37 +232,29 @@
         "コードをマージする",
         "イシューを作成する"
       ],
-      "correctAnswer": 1,
-      "explanation": "Forkは、他のユーザーのリポジトリを自分のGitHubアカウントにコピーする機能です。これにより、元のリポジトリに影響を与えることなく、自由に変更を加えることができます。オープンソースプロジェクトへの貢献でよく使われます。",
-      "technicalTerms": [
-        { "term": "リポジトリ", "definition": "プロジェクトのファイルやバージョン履歴を保存する場所" },
-        { "term": "オープンソース", "definition": "ソースコードが公開され、誰でも自由に使用・改変できるソフトウェア" }
-      ],
-      "referenceLinks": [
-        { "title": "GitHub Docs - Fork", "url": "https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo" }
-      ],
-      "imageKeyword": "github collaboration"
+      "answer": 1,
+      "explanation": "Forkは、他のユーザーのリポジトリを自分のGitHubアカウントにコピーする機能です。これにより、元のリポジトリに影響を与えることなく、自由に変更を加えることができます。",
+      "keywords": {
+        "リポジトリ": "プロジェクトのファイルやバージョン履歴を保存する場所",
+        "オープンソース": "ソースコードが公開され、誰でも自由に使用・改変できるソフトウェア"
+      }
     },
     {
       "id": "devops_002",
       "categoryId": "devops",
-      "question": "DockerでイメージからコンテナをW起動するコマンドはどれですか？",
+      "question": "Dockerでイメージからコンテナを起動するコマンドはどれですか？",
       "options": [
         "docker build",
         "docker pull",
         "docker run",
         "docker push"
       ],
-      "correctAnswer": 2,
-      "explanation": "docker runコマンドは、指定したイメージから新しいコンテナを作成して起動します。docker buildはDockerfileからイメージを作成し、docker pullはレジストリからイメージをダウンロードし、docker pushはイメージをレジストリにアップロードします。",
-      "technicalTerms": [
-        { "term": "コンテナ", "definition": "アプリケーションとその依存関係を含む軽量な実行環境" },
-        { "term": "イメージ", "definition": "コンテナを作成するためのテンプレート" }
-      ],
-      "referenceLinks": [
-        { "title": "Docker Docs", "url": "https://docs.docker.com/engine/reference/commandline/run/" }
-      ],
-      "imageKeyword": "docker container"
+      "answer": 2,
+      "explanation": "docker runコマンドは、指定したイメージから新しいコンテナを作成して起動します。docker buildはDockerfileからイメージを作成し、docker pullはレジストリからイメージをダウンロードします。",
+      "keywords": {
+        "コンテナ": "アプリケーションとその依存関係を含む軽量な実行環境",
+        "イメージ": "コンテナを作成するためのテンプレート"
+      }
     },
     {
       "id": "devops_003",
@@ -318,16 +266,12 @@
         "Computer Interface",
         "Central Intelligence"
       ],
-      "correctAnswer": 1,
-      "explanation": "CIはContinuous Integration（継続的インテグレーション）の略です。開発者が頻繁にコードをメインブランチに統合し、自動テストを実行するプラクティスです。CDはContinuous Delivery/Deploymentの略で、本番環境への自動デプロイを指します。",
-      "technicalTerms": [
-        { "term": "継続的インテグレーション", "definition": "コードの変更を頻繁に統合し、自動テストを実行する開発手法" },
-        { "term": "デプロイ", "definition": "アプリケーションを本番環境に配置すること" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - 継続的インテグレーション", "url": "https://ja.wikipedia.org/wiki/継続的インテグレーション" }
-      ],
-      "imageKeyword": "ci cd pipeline"
+      "answer": 1,
+      "explanation": "CIはContinuous Integration（継続的インテグレーション）の略です。開発者が頻繁にコードをメインブランチに統合し、自動テストを実行するプラクティスです。",
+      "keywords": {
+        "継続的インテグレーション": "コードの変更を頻繁に統合し、自動テストを実行する開発手法",
+        "デプロイ": "アプリケーションを本番環境に配置すること"
+      }
     },
     {
       "id": "security_001",
@@ -339,16 +283,12 @@
         "Extended Security System",
         "Cross-Server Security"
       ],
-      "correctAnswer": 0,
-      "explanation": "XSSはCross-Site Scripting（クロスサイトスクリプティング）の略です。悪意のあるスクリプトをWebページに注入し、ユーザーのブラウザで実行させる攻撃手法です。入力値のサニタイズやエスケープ処理で防ぐことができます。",
-      "technicalTerms": [
-        { "term": "スクリプト注入", "definition": "悪意のあるコードをWebアプリケーションに挿入すること" },
-        { "term": "サニタイズ", "definition": "危険な文字や入力を無害化する処理" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - クロスサイトスクリプティング", "url": "https://ja.wikipedia.org/wiki/クロスサイトスクリプティング" }
-      ],
-      "imageKeyword": "web security"
+      "answer": 0,
+      "explanation": "XSSはCross-Site Scripting（クロスサイトスクリプティング）の略です。悪意のあるスクリプトをWebページに注入し、ユーザーのブラウザで実行させる攻撃手法です。",
+      "keywords": {
+        "スクリプト注入": "悪意のあるコードをWebアプリケーションに挿入すること",
+        "サニタイズ": "危険な文字や入力を無害化する処理"
+      }
     },
     {
       "id": "security_002",
@@ -360,16 +300,12 @@
         "FTP",
         "SMTP"
       ],
-      "correctAnswer": 1,
-      "explanation": "HTTPSはTLS（Transport Layer Security）またはその前身であるSSL（Secure Sockets Layer）を使用して通信を暗号化します。これにより、データの盗聴や改ざんを防ぎ、安全な通信を実現します。",
-      "technicalTerms": [
-        { "term": "TLS", "definition": "Transport Layer Securityの略。通信を暗号化するプロトコル" },
-        { "term": "暗号化", "definition": "データを第三者に読まれないように変換すること" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - Transport Layer Security", "url": "https://ja.wikipedia.org/wiki/Transport_Layer_Security" }
-      ],
-      "imageKeyword": "https security"
+      "answer": 1,
+      "explanation": "HTTPSはTLS（Transport Layer Security）またはその前身であるSSL（Secure Sockets Layer）を使用して通信を暗号化します。",
+      "keywords": {
+        "TLS": "Transport Layer Securityの略。通信を暗号化するプロトコル",
+        "暗号化": "データを第三者に読まれないように変換すること"
+      }
     },
     {
       "id": "security_003",
@@ -381,16 +317,12 @@
         "HTTPSを使用する",
         "ファイアウォールを設置する"
       ],
-      "correctAnswer": 1,
+      "answer": 1,
       "explanation": "SQLインジェクションを防ぐ最も効果的な方法は、プリペアドステートメント（パラメータ化クエリ）を使用することです。これにより、ユーザー入力がSQLコードとして解釈されることを防ぎます。",
-      "technicalTerms": [
-        { "term": "SQLインジェクション", "definition": "悪意のあるSQLコードを入力に含めてデータベースを攻撃する手法" },
-        { "term": "プリペアドステートメント", "definition": "SQL文とパラメータを分離して実行する安全な方法" }
-      ],
-      "referenceLinks": [
-        { "title": "Wikipedia - SQLインジェクション", "url": "https://ja.wikipedia.org/wiki/SQLインジェクション" }
-      ],
-      "imageKeyword": "sql injection security"
+      "keywords": {
+        "SQLインジェクション": "悪意のあるSQLコードを入力に含めてデータベースを攻撃する手法",
+        "プリペアドステートメント": "SQL文とパラメータを分離して実行する安全な方法"
+      }
     }
   ]
 }

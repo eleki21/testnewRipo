@@ -317,7 +317,7 @@ export const useQuizStore = create<QuizState>((set, get) => {
       const { currentQuestion, session } = get();
       if (!currentQuestion || !session) return;
 
-      const isCorrect = answerIndex === currentQuestion.correctAnswer;
+      const isCorrect = answerIndex === currentQuestion.answer;
       const newScore = isCorrect ? session.score + 1 : session.score;
       const newAnswers = [...session.answers, answerIndex];
 

@@ -2,21 +2,9 @@ export interface QuizQuestion {
   id: string;
   question: string;
   options: string[];
-  correctAnswer: number;
+  answer: number;
   explanation: string;
-  technicalTerms: TechnicalTerm[];
-  referenceLinks: ReferenceLink[];
-  imageKeyword?: string;
-}
-
-export interface TechnicalTerm {
-  term: string;
-  definition: string;
-}
-
-export interface ReferenceLink {
-  title: string;
-  url: string;
+  keywords: Record<string, string>;
 }
 
 export interface KeywordValidationResult {

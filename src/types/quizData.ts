@@ -1,5 +1,3 @@
-import type { TechnicalTerm, ReferenceLink } from './quiz';
-
 export interface QuizCategory {
   id: string;
   name: string;
@@ -12,11 +10,9 @@ export interface QuizQuestionData {
   categoryId: string;
   question: string;
   options: string[];
-  correctAnswer: number;
+  answer: number;
   explanation: string;
-  technicalTerms: TechnicalTerm[];
-  referenceLinks: ReferenceLink[];
-  imageKeyword?: string;
+  keywords: Record<string, string>;
 }
 
 export interface QuizDataFile {

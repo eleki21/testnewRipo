@@ -25,7 +25,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   onSelectAnswer,
   onNext,
 }) => {
-  const isCorrect = selectedAnswer === question.correctAnswer;
+  const isCorrect = selectedAnswer === question.answer;
   const isLastQuestion = questionNumber === totalQuestions;
 
   return (
@@ -48,7 +48,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
         <AnswerOptions
           options={question.options}
           selectedAnswer={selectedAnswer}
-          correctAnswer={question.correctAnswer}
+          correctAnswer={question.answer}
           showResult={showExplanation}
           onSelect={onSelectAnswer}
         />
